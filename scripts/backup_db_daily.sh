@@ -10,9 +10,9 @@ RETENTION_DAYS=90 # Keep 90 days of daily backups
 
 # Extract database credentials from wp-config.php
 # Using sed for robust extraction
-DB_NAME=$(grep "DB_NAME" "$WP_CONFIG_PATH" | sed -n "s/define('DB_NAME', '\([^']*\)');/\1/p")
-DB_USER=$(grep "DB_USER" "$WP_CONFIG_PATH" | sed -n "s/define('DB_USER', '\([^']*\)');/\1/p")
-DB_PASSWORD=$(grep "DB_PASSWORD" "$WP_CONFIG_PATH" | sed -n "s/define('DB_PASSWORD', '\([^']*\)');/\1/p")
+DB_NAME=$(grep "DB_NAME" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_NAME',[[:space:]]*'\([^']*\)'.*$/\1/p")
+DB_USER=$(grep "DB_USER" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_USER',[[:space:]]*'\([^']*\)'.*$/\1/p")
+DB_PASSWORD=$(grep "DB_PASSWORD" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_PASSWORD',[[:space:]]*'\([^']*\)'.*$/\1/p")
 
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 
