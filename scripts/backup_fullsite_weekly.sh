@@ -10,9 +10,9 @@ LOG_FILE="/var/log/backup_fullsite.log" # Ensure this file is writable by the us
 RETENTION_DAYS=90 # Keep 90 days of weekly backups locally
 
 # Extract database credentials from wp-config.php
-DB_NAME=$(grep "DB_NAME" "$WP_CONFIG_PATH" | sed -n "s/define('DB_NAME', '\([^']*\)');/\1/p")
-DB_USER=$(grep "DB_USER" "$WP_CONFIG_PATH" | sed -n "s/define('DB_USER', '\([^']*\)');/\1/p")
-DB_PASSWORD=$(grep "DB_PASSWORD" "$WP_CONFIG_PATH" | sed -n "s/define('DB_PASSWORD', '\([^']*\)');/\1/p")
+DB_NAME=$(grep "DB_NAME" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_NAME',[[:space:]]*'\([^']*\)'.*$/\1/p")
+DB_USER=$(grep "DB_USER" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_USER',[[:space:]]*'\([^']*\)'.*$/\1/p")
+DB_PASSWORD=$(grep "DB_PASSWORD" "$WP_CONFIG_PATH" | sed -n "s/^[[:space:]]*define('DB_PASSWORD',[[:space:]]*'\([^']*\)'.*$/\1/p")
 
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 
